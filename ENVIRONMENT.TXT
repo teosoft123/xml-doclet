@@ -1,0 +1,16 @@
+This project strives to have minimal environmental requirements.
+Currently you only need Maven installed (or integrated into your IDE),
+and the JDK installed of course.
+
+On Windows, if using the appassembler bat script invoke the project,
+currently you have to create an environment
+variable CLASSPATH_PREFIX set to the location of your jdk tools jar;
+something like:  
+	"C:\Program Files\Java\jdk1.5.0_14\lib\tools.jar" 
+	(notice the quotes--you need the quotes due to behavior of appassembler script).
+
+On Mac OS, this is not necessary because tools.jar does not exist in the
+JDK as a separate jar.
+
+Linux untested. 
+
