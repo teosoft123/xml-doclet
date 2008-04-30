@@ -182,7 +182,7 @@ public class App
 
         String concatedSourcePaths = ConcatPaths(sourcePaths);
         String concatedSubPackages = ConcatStrings(subPackages, ':');
-
+        
         // Prepare doclet output loggers
         CreateLoggingDirectory();
 
@@ -206,7 +206,7 @@ public class App
             // by setting this to 'private', nothing is omitted in the parsing
             arguments.add("-private");
 
-            arguments.add("-docletpath");
+            arguments.add("-classpath");
             arguments.add(classPath);
 
             if(concatedSourcePaths != null)
@@ -232,6 +232,8 @@ public class App
             }
 
             String[] staticArguments = arguments.toArray(new String[] {});
+
+            log.info( "Executing doclet with arguments: " + ConcatStrings(staticArguments, ' ') );
 
             com.sun.tools.javadoc.Main.execute(
                     "ownedthxxmldoclet",

@@ -67,7 +67,7 @@ public class Parser
             {
                 mediary = new ParserMediary(doc.name(),
                         doc.commentText(),
-                        ParseAnnotationInstances(doc.annotations()));
+                        ParseAnnotationInstances(doc.annotations(), doc.name()));
 
                 processingStorage.put(doc, mediary);
             }
@@ -212,7 +212,7 @@ public class Parser
             xmlClass.fields = fieldList.toArray(new Field[] {});
         }
 
-        xmlClass.annotationInstances = ParseAnnotationInstances(docClass.annotations());
+        xmlClass.annotationInstances = ParseAnnotationInstances(docClass.annotations(), docClass.qualifiedName());
         return xmlClass;
     }
 
@@ -281,7 +281,7 @@ public class Parser
      * @param annotationDocs Annotations decorated on some type
      * @return Serializable representation of annotations
      */
-    protected static AnnotationInstance[] ParseAnnotationInstances(AnnotationDesc[] annotationDocs)
+    protected static AnnotationInstance[] ParseAnnotationInstances(AnnotationDesc[] annotationDocs, String origin)
     {
         AnnotationInstance[] annotations = null;
 
@@ -292,9 +292,23 @@ public class Parser
             for(AnnotationDesc annot : annotationDocs)
             {
                 AnnotationInstance instance = new AnnotationInstance();
-                            
-                instance.name = annot.annotationType().name();
-                instance.qualifiedName = annot.annotationType().qualifiedTypeName();
+
+                AnnotationTypeDoc annotTypeInfo = null;
+                try
+                {
+                    annotTypeInfo = annot.annotationType();
+                    instance.name = annot.annotationType().name();
+                    instance.qualifiedName = annot.annotationType().qualifiedTypeName();
+
+                }
+                catch(ClassCastException castException)
+                {
+                    log.error( "Unable to obtain type data about an annotation found on: " + origin);
+                    log.error( "Add to the -cp parameter the class/jar that defines this annotation.");
+                    instance.name = null;
+                    instance.qualifiedName = null;
+                }
+
                 AnnotationDesc.ElementValuePair[] arguments = annot.elementValues();
                 if(arguments != null && arguments.length > 0)
                 {
@@ -370,7 +384,7 @@ public class Parser
             log.debug("No methods in interface: " + docClass.name());
         }
 
-        xmlInterface.annotationInstances = ParseAnnotationInstances(docClass.annotations());
+        xmlInterface.annotationInstances = ParseAnnotationInstances(docClass.annotations(), docClass.qualifiedName());
         return xmlInterface;
     }
 
@@ -411,7 +425,7 @@ public class Parser
             log.debug("No elements in annotation: " + docClass.name());
         }
 
-        xmlAnnotation.annotationInstances = ParseAnnotationInstances(docClass.annotations());
+        xmlAnnotation.annotationInstances = ParseAnnotationInstances(docClass.annotations(), docClass.qualifiedName());
         return xmlAnnotation;
     }
 
@@ -464,7 +478,7 @@ public class Parser
             xmlEnum.fields = fieldList.toArray(new EnumField[] {});
         }
 
-        xmlEnum.annotationInstances = ParseAnnotationInstances(docClass.annotations());
+        xmlEnum.annotationInstances = ParseAnnotationInstances(docClass.annotations(), docClass.qualifiedName());
         return xmlEnum;
     }
 
@@ -520,7 +534,7 @@ public class Parser
         }
 
         // parse annotations for the constructor
-        xmlConstructor.annotationInstances = ParseAnnotationInstances(docConstructor.annotations());
+        xmlConstructor.annotationInstances = ParseAnnotationInstances(docConstructor.annotations(), docConstructor.qualifiedName());
 
         return xmlConstructor;
     }
@@ -650,7 +664,7 @@ public class Parser
         }
 
         // parse annotations from the method
-        xmlMethod.annotationInstances = ParseAnnotationInstances(docMethod.annotations());
+        xmlMethod.annotationInstances = ParseAnnotationInstances(docMethod.annotations(), docMethod.qualifiedName());
         
         return xmlMethod;
     }
@@ -687,7 +701,7 @@ public class Parser
         xmlField.scope = DetermineScope(docField);
 
         // parse annotations from the field
-        xmlField.annotationInstances = ParseAnnotationInstances(docField.annotations());
+        xmlField.annotationInstances = ParseAnnotationInstances(docField.annotations(), docField.qualifiedName());
 
         return xmlField;
     }
@@ -730,7 +744,7 @@ public class Parser
              xmlParameter.comment = paramComment.parameterComment();  
         }
 
-        xmlParameter.annotationInstances = ParseAnnotationInstances(docParameter.annotations());
+        xmlParameter.annotationInstances = ParseAnnotationInstances(docParameter.annotations(), docParameter.typeName());
         return xmlParameter;
     }
 
