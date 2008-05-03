@@ -199,7 +199,7 @@ public class EnumTest
 
         AnnotationArgument argument = annotation.arguments[0];
         assertEquals(argument.name, "value");
-        assertEquals(argument.value, "\"mister\"");
+        assertEquals(argument.value[0], "mister");
 
     }
 }

@@ -414,7 +414,7 @@ public class MethodTest
         assertEquals(annotation.arguments.length, 1);
         AnnotationArgument annotArgument = annotation.arguments[0];
         assertEquals(annotArgument.name, "value");
-        assertEquals(annotArgument.value, "\"java.lang.Warning\"");
+        assertEquals(annotArgument.value[0], "java.lang.Warning");
 
         // negative -- no annotations
         assertNull(findByMethodName("method4", testMethods).annotationInstances);

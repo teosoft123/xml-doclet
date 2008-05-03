@@ -318,8 +318,54 @@ public class Parser
                     {
                         AnnotationArgument annotationArgument = new AnnotationArgument();
                         annotationArgument.name = pair.element().name();
-                        annotationArgument.value = pair.value().toString();
 
+                        Type annotationArgumentType = pair.element().returnType();
+                        annotationArgument.type = annotationArgumentType.qualifiedTypeName();
+                        annotationArgument.isPrimitive = annotationArgumentType.isPrimitive();
+                        annotationArgument.isArray = annotationArgumentType.dimension().length() > 0;
+
+                        Object objValue = pair.value().value();
+                        if ( objValue instanceof AnnotationValue[] )
+                        {
+                            AnnotationValue[] realValues = ( AnnotationValue[] ) objValue;
+                            String[] values = new String[realValues.length];
+
+                            for(int i = 0; i < realValues.length; i++)
+                            {
+                                values[i] = realValues[i].value().toString();
+                            }
+                            annotationArgument.value = values;
+                        }
+                        else if ( objValue instanceof Number )
+                        {
+                            Number number = ( Number ) objValue;
+                            annotationArgument.value = new String[] { number.toString() };
+                        }
+                        else if ( objValue instanceof Character )
+                        {
+                            Character character = ( Character ) objValue;
+                            annotationArgument.value = new String[] { character.toString() };
+                        }
+                        else if ( objValue instanceof Boolean )
+                        {
+                            Boolean booleanValue = ( Boolean ) objValue;
+                            annotationArgument.value = new String[] { booleanValue.toString() };
+                        }
+                        else if ( objValue instanceof String )
+                        {
+                            String stringValue = (String) objValue;
+                            annotationArgument.value = new String[] { stringValue };
+                        }
+                        else if ( objValue instanceof FieldDoc )
+                        {
+                            FieldDoc field = (FieldDoc) objValue;
+                            annotationArgument.value = new String[] { field.name() };
+                        }
+                        else if ( objValue instanceof ClassDoc )
+                        {
+                            ClassDoc classDoc = (ClassDoc) objValue;
+                            annotationArgument.value = new String[] { classDoc.qualifiedTypeName() };
+                        }
                         argumentList.add(annotationArgument);
                     }
 

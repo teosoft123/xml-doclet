@@ -843,5 +843,249 @@ public class ClassTest
         assertEquals(typeVar.bounds[0], String.class.getName());
         assertEquals(typeVar.bounds[1], Runnable.class.getName());
     }
+
+    /**
+     * testing integer annotation argument
+     */
+    public void testClass16()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class16.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass16 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass16.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.name, "id");
+        assertEquals(argument.type, "int");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0], "3");
+        assertTrue(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing integer array annotation argument
+     */
+    public void testClass17()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class17.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass17 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass17.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "int");
+        assertEquals(argument.value.length, 2);
+        assertEquals(argument.value[0], "1");
+        assertEquals(argument.value[1], "2");
+        assertTrue(argument.isPrimitive);
+        assertTrue(argument.isArray);
+    }
+
+    /**
+     * testing integer array annotation argument
+     */
+    public void testClass18()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class18.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass18 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass18.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "java.lang.String");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0], "hey");
+        assertFalse(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing enum annotation argument
+     */
+    public void testClass19()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class19.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass19 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass19.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "com.ownedthx.xmldoclet.simpledata.Enum1");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0], "a");
+        assertFalse(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing class annotation argument
+     */
+    public void testClass20()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class20.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass20 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass20.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "java.lang.Class");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0], "java.lang.String");
+        assertFalse(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing character annotation argument
+     */
+    public void testClass21()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class21.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass21 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass21.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "char");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0],  Integer.toString((int) 'a'));
+        assertTrue(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing 0 character annotation argument
+     */
+    public void testClass22()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class22.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass22 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass22.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "char");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0],  Integer.toString( 0 ));
+        assertTrue(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing boolean annotation argument
+     */
+    public void testClass23()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class23.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass23 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass23.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "boolean");
+        assertEquals(argument.value.length, 1);
+        assertEquals(argument.value[0],  Boolean.TRUE.toString());
+        assertTrue(argument.isPrimitive);
+        assertFalse(argument.isArray);
+    }
+
+    /**
+     * testing empty int array annotation argument
+     */
+    public void testClass24()
+    {
+        App app = new App();
+
+        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class24.java" };
+
+        Root root = app.processSource(
+                null,
+                null,
+                null,
+                sourceFiles,
+                null );
+
+        Package sdPackage = root.packages[0];
+        Class sdClass24 = sdPackage.classes[0];
+        AnnotationInstance instance = sdClass24.annotationInstances[0];
+        AnnotationArgument argument = instance.arguments[0];
+        assertEquals(argument.type, "int");
+        assertEquals(argument.value.length, 0);
+        assertTrue(argument.isPrimitive);
+        assertTrue(argument.isArray);
+    }
 }
 

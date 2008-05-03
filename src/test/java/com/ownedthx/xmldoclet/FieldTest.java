@@ -140,7 +140,7 @@ public class FieldTest
 
         AnnotationArgument argument = annotation.arguments[0];
         assertEquals(argument.name, "value");
-        assertEquals(argument.value, "\"mister\"");
+        assertEquals(argument.value[0], "mister");
 
         // field13 - type testing
         field = findByFieldName("field13", testFields);
