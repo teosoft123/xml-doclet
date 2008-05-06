@@ -851,7 +851,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class16.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class16.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation3.java" };
 
         Root root = app.processSource(
                 null,
@@ -879,7 +881,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class17.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class17.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation5.java"};
 
         Root root = app.processSource(
                 null,
@@ -907,7 +911,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class18.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class18.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation6.java"};
 
         Root root = app.processSource(
                 null,
@@ -934,7 +940,10 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class19.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class19.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation7.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Enum1.java"};
 
         Root root = app.processSource(
                 null,
@@ -961,7 +970,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class20.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class20.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation8.java"};
 
         Root root = app.processSource(
                 null,
@@ -988,7 +999,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class21.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class21.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation10.java"};
 
         Root root = app.processSource(
                 null,
@@ -1015,7 +1028,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class22.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class22.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation10.java"};
 
         Root root = app.processSource(
                 null,
@@ -1042,7 +1057,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class23.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class23.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation11.java"};
 
         Root root = app.processSource(
                 null,
@@ -1069,7 +1086,9 @@ public class ClassTest
     {
         App app = new App();
 
-        String[] sourceFiles = new String[] { "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class24.java" };
+        String[] sourceFiles = new String[] {
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Class24.java",
+                "./src/test/java/com/ownedthx/xmldoclet/simpledata/Annotation5.java"};
 
         Root root = app.processSource(
                 null,
