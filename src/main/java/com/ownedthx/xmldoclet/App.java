@@ -36,12 +36,18 @@ public class App
 
     static Logger log = Logger.getLogger(App.class.getName());
 
+    static {
+        initializeLogging( null );
+    }
+
 
     /**
      * This intemediary output static variable exists in order to capture
      * output of the start static method
      */
     protected static Root parsedRoot;
+    private static String directory = ".";
+    private static String filename = "javadoc.xml";
 
     public static void main( String[] args )
     {
@@ -51,8 +57,6 @@ public class App
         }
         catch( ParseException e)
         {
-            initializeLogging(null);
-
             BasicConfigurator.configure();
 
               log.error("Unable to parse command-line arguments.\n\n" +
@@ -84,7 +88,7 @@ public class App
         }
         else
         {
-            output = "./javadoc.xml";
+            output = "javadoc.xml";
         }
 
         String[] sourcePaths = ParseConcatedPath(CmdlineParser.getSourcePath());
@@ -94,7 +98,7 @@ public class App
 
         App app = new App();
         Root root = app.processSource(CmdlineParser.getClassPath(), sourcePaths, packages, sourceFiles, subPackages);
-        app.write(root, output);
+        app.write(root, new File( output ));
     }
 
 
@@ -182,7 +186,7 @@ public class App
 
         String concatedSourcePaths = ConcatPaths(sourcePaths);
         String concatedSubPackages = ConcatStrings(subPackages, ':');
-        
+
         // Prepare doclet output loggers
         CreateLoggingDirectory();
 
@@ -285,7 +289,7 @@ public class App
     private String ConcatStrings(String[] strings, char delimiter)
     {
          String concated = null;
-        
+
         if(strings != null && strings.length > 0)
         {
             StringBuffer buffer = new StringBuffer();
@@ -312,7 +316,7 @@ public class App
     private String ConcatPaths(String[] paths)
     {
         String concated = null;
-        
+
         if(paths != null && paths.length > 0)
         {
             StringBuffer buffer = new StringBuffer();
@@ -375,9 +379,60 @@ public class App
          return LanguageVersion.JAVA_1_5;
     }
 
+    /**
+     * Returns the number of arguments required for the given option.
+     *
+     * @param option The name of the option.
+     *
+     * @return The number of arguments for that option.
+     *
+     * @see com.sun.javadoc.Doclet#optionLength(String)
+     */
+    public static int optionLength(String option) {
+
+        if ("-d".equals( option ))
+            return 2;
+        if ("-f".equals( option ))
+            return 2;
+
+        return 0;
+    }
+
+    /**
+     * Check that options have the correct arguments.
+     * <p/>
+     * <p>This method is not required, but is recommended, as every option will be considered valid
+     * if this method is not present. It will default gracefully (to true) if absent.
+     * <p/>
+     * <p>Printing option related error messages (using the provided DocErrorReporter) is the
+     * responsibility of this method.
+     *
+     * @param o  The two dimensional array of options.
+     * @param reporter The error reporter.
+     *
+     * @return <code>true</code> if the options are valid.
+     *
+     * @see com.sun.javadoc.Doclet#validOptions(String[][], DocErrorReporter)
+     */
+    public static boolean validOptions(String o[][], DocErrorReporter reporter) {
+
+        for (String[] optionValues : o) {
+            String option = optionValues.length > 0? optionValues[0]: null;
+            String value = optionValues.length > 1? optionValues[1]: null;
+
+            if ("-d".equals( option ))
+                directory = value;
+            if ("-f".equals( option ))
+                filename = value;
+        }
+
+        return true;
+    }
+
     public static boolean start(RootDoc doc)
     {
         parsedRoot = Parser.ParseRoot(doc);
+        new App().write( parsedRoot, new File( directory, filename ) );
 
         return true;
     }
@@ -385,17 +440,17 @@ public class App
     /**
      * Writes the XStream compatible Root structure to file
      * @param root XStream compatible data structure
-     * @param outputFile The file to write to
+     * @param outFile The file to write to
      * @return success
      */
-    public boolean write(Root root, String outputFile)
+    public boolean write(Root root, File outFile)
     {
-        if(outputFile == null)
+        if(outFile == null)
         {
             // default of current directory with a name of javadoc.xml
-            outputFile = "./javadoc.xml";
+            outFile = new File("javadoc.xml");
         }
-        
+
         XStream stream = new XStream(new XppDriver()
         {
             public HierarchicalStreamWriter createWriter(Writer out)
@@ -432,7 +487,6 @@ public class App
         try
         {
             // attempt to create output Directory, if needed
-            File outFile = new File(outputFile);
             File outDir = outFile.getParentFile();
 
             if(outDir != null && !outDir.exists())
@@ -457,8 +511,8 @@ public class App
         {
             try
             {
-                fileStream = new FileOutputStream(outputFile);
-                log.info("Created output file at: " + outputFile);
+                fileStream = new FileOutputStream(outFile);
+                log.info("Created output file at: " + outFile);
                 createdOutputFile = true;
             }
             catch(Exception e)
