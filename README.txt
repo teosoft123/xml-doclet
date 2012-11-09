@@ -1,3 +1,7 @@
+
+This code was cloned from http://code.google.com/p/xml-doclet/
+with minimal modifications. Many tanks to Seth Call for writing it.
+
 Overview
 ===========
 
