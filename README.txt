@@ -1,6 +1,8 @@
-
 This code was cloned from http://code.google.com/p/xml-doclet/
 with minimal modifications. Many tanks to Seth Call for writing it.
+
+Additional thanks to lhunath@lyndir.com who provided a patch to adopt 
+this code with javadoc tool: http://code.google.com/p/xml-doclet/issues/detail?id=1
 
 Overview
 ===========
