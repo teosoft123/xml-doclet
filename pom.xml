@@ -7,6 +7,11 @@
   <version>0.2</version>
   <name>xmldoclet</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
 <!--
   <profiles>
     <profile>

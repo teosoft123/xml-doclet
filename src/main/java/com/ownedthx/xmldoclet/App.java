@@ -471,6 +471,7 @@ public class App
         stream.alias("exception", ExceptionInstance.class);
         stream.alias("class", Class.class);
         stream.alias("annotation", Annotation.class);
+        stream.alias("annotationArgument", AnnotationArgument.class);
         stream.alias("element", AnnotationElement.class);
         stream.alias("package", Package.class);
         stream.alias("root", Root.class);
