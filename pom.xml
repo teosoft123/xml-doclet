@@ -4,7 +4,7 @@
   <groupId>com.ownedthx.xmldoclet</groupId>
   <artifactId>xmldoclet</artifactId>
   <packaging>jar</packaging>
-  <version>0.2</version>
+  <version>0.3</version>
   <name>xmldoclet</name>
   <url>http://maven.apache.org</url>
 
